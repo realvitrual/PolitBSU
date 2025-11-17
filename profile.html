@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет - Кафедра политологии БГУ</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                📚 Кафедра политологии
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="catalog.html">Каталог книг</a></li>
+                <li><a href="profile.html">Личный кабинет</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+                <li><a href="#" onclick="logout()">Выйти</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Личный кабинет -->
+    <section class="profile-section">
+        <div class="container">
+            <!-- Заголовок профиля -->
+            <div class="profile-header">
+                <div class="user-avatar" id="userAvatar">
+                    ПС
+                </div>
+                <div class="user-info">
+                    <h2 id="userName">Пользователь Системы</h2>
+                    <p id="userEmail">user@example.com</p>
+                    <p>Читатель библиотеки с <span id="joinDate">2024</span></p>
+                </div>
+            </div>
+
+            <!-- Статистика -->
+            <div class="user-stats">
+                <div class="stat-card">
+                    <span class="stat-number" id="statBooksRead">0</span>
+                    <span class="stat-label">Прочитано книг</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="statFavorites">0</span>
+                    <span class="stat-label">В избранном</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="statBookmarks">0</span>
+                    <span class="stat-label">Закладок</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="statDownloads">0</span>
+                    <span class="stat-label">Скачано</span>
+                </div>
+            </div>
+
+            <!-- Вкладки -->
+            <div class="profile-tabs">
+                <button class="tab-button active" onclick="openTab('bookmarks')">📖 Закладки</button>
+                <button class="tab-button" onclick="openTab('favorites')">⭐ Избранное</button>
+                <button class="tab-button" onclick="openTab('reading')">📚 Читаю сейчас</button>
+                <button class="tab-button" onclick="openTab('history')">📋 История</button>
+            </div>
+
+            <!-- Содержимое вкладок -->
+            <div class="tab-content">
+                <!-- Вкладка закладок -->
+                <div id="bookmarks" class="tab-pane active">
+                    <h3>Мои закладки</h3>
+                    <div id="bookmarksContainer">
+                        <!-- Закладки будут загружены через JavaScript -->
+                    </div>
+                    <div class="empty-state" id="emptyBookmarks" style="display: none;">
+                        <h3>Закладок пока нет</h3>
+                        <p>Добавляйте закладки при чтении книг, чтобы продолжить с того же места</p>
+                        <a href="catalog.html" class="btn btn-primary" style="margin-top: 1rem;">
+                            Найти книги для чтения
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Вкладка избранного -->
+                <div id="favorites" class="tab-pane">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <h3>Избранные книги</h3>
+                        <button class="btn btn-outline" onclick="clearAllFavorites()">
+                            🗑️ Очистить все
+                        </button>
+                    </div>
+                    <div class="books-grid" id="favoritesContainer">
+                        <!-- Избранные книги будут загружены через JavaScript -->
+                    </div>
+                    <div class="empty-state" id="emptyFavorites" style="display: none;">
+                        <h3>В избранном пока нет книг</h3>
+                        <p>Добавляйте книги в избранное, чтобы быстро находить их позже</p>
+                        <a href="catalog.html" class="btn btn-primary" style="margin-top: 1rem;">
+                            Перейти в каталог
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Вкладка "Читаю сейчас" -->
+                <div id="reading" class="tab-pane">
+                    <h3>Читаю сейчас</h3>
+                    <div id="readingContainer">
+                        <!-- Книги в процессе чтения -->
+                    </div>
+                    <div class="empty-state" id="emptyReading" style="display: none;">
+                        <h3>Нет активных книг для чтения</h3>
+                        <p>Начните читать книгу из каталога, и она появится здесь</p>
+                        <a href="catalog.html" class="btn btn-primary" style="margin-top: 1rem;">
+                            Начать чтение
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Вкладка истории -->
+                <div id="history" class="tab-pane">
+                    <h3>История активности</h3>
+                    <div id="historyContainer">
+                        <!-- История будет загружена через JavaScript -->
+                    </div>
+                    <div class="empty-state" id="emptyHistory" style="display: none;">
+                        <h3>История активности пуста</h3>
+                        <p>Здесь будет отображаться ваша активность в библиотеке</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Кафедра политологии</h3>
+                    <p>Юридический факультет<br>Белорусский государственный университет</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li>📞 +375 (17) 209-55-55</li>
+                        <li>📧 politology@bsu.by</li>
+                        <li>🏛️ г. Минск, ул. Ленинградская, 8</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Ресурсы</h3>
+                    <ul>
+                        <li><a href="catalog.html">Каталог книг</a></li>
+                        <li><a href="profile.html">Личный кабинет</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Кафедра политологии Юридического факультета БГУ. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+    <script>
+        // Функция переключения вкладок
+        function openTab(tabName) {
+            // Скрыть все вкладки
+            const tabPanes = document.querySelectorAll('.tab-pane');
+            tabPanes.forEach(pane => pane.classList.remove('active'));
+            
+            // Убрать активный класс у всех кнопок
+            const tabButtons = document.querySelectorAll('.tab-button');
+            tabButtons.forEach(button => button.classList.remove('active'));
+            
+            // Показать выбранную вкладку
+            document.getElementById(tabName).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // Загрузка данных пользователя
+        function loadUserData() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Обновляем информацию пользователя
+            document.getElementById('userName').textContent = currentUser.name || 'Пользователь';
+            document.getElementById('userEmail').textContent = currentUser.email;
+            document.getElementById('userAvatar').textContent = (currentUser.name || 'ПС').substring(0, 2).toUpperCase();
+            
+            if (currentUser.joined) {
+                const joinDate = new Date(currentUser.joined);
+                document.getElementById('joinDate').textContent = joinDate.getFullYear();
+            }
+
+            // Загружаем данные для вкладок
+            loadBookmarks();
+            loadFavorites();
+            loadReadingProgress();
+            loadHistory();
+            updateStats();
+        }
+
+        // Загрузка закладок
+        function loadBookmarks() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '{}');
+            const userBookmarks = bookmarks[currentUser.email] || {};
+            
+            const container = document.getElementById('bookmarksContainer');
+            const emptyState = document.getElementById('emptyBookmarks');
+            
+            if (Object.keys(userBookmarks).length === 0) {
+                container.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+            
+            emptyState.style.display = 'none';
+            
+            let bookmarksHTML = '';
+            Object.keys(userBookmarks).forEach(bookId => {
+                const bookmark = userBookmarks[bookId];
+                const book = books.find(b => b.id == bookId);
+                if (book) {
+                    const progress = Math.min(100, Math.round((bookmark.currentPage / book.pages) * 100));
+                    
+                    bookmarksHTML += `
+                        <div class="bookmark-item">
+                            <div class="bookmark-cover">${book.cover}</div>
+                            <div class="bookmark-details">
+                                <h4>${book.title}</h4>
+                                <div class="bookmark-meta">
+                                    <span>${book.author}</span> • 
+                                    <span>${book.year} г.</span> • 
+                                    <span>${book.pages} стр.</span>
+                                </div>
+                                <div class="reading-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: ${progress}%"></div>
+                                    </div>
+                                    <div class="progress-text">
+                                        <span>Страница ${bookmark.currentPage} из ${book.pages}</span>
+                                        <span>${progress}%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bookmark-actions">
+                                <button class="btn btn-primary" onclick="continueReading(${book.id})">
+                                    Продолжить
+                                </button>
+                                <button class="btn btn-outline" onclick="updateBookmark(${book.id})">
+                                    📍 Обновить
+                                </button>
+                                <button class="btn btn-danger" onclick="removeBookmark(${book.id})">
+                                    ❌ Удалить
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+            
+            container.innerHTML = bookmarksHTML;
+        }
+
+        // Загрузка избранного
+        function loadFavorites() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '{}');
+            const userFavorites = favorites[currentUser.email] || [];
+            
+            const container = document.getElementById('favoritesContainer');
+            const emptyState = document.getElementById('emptyFavorites');
+            
+            if (userFavorites.length === 0) {
+                container.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+            
+            emptyState.style.display = 'none';
+            
+            const favoriteBooks = books.filter(book => userFavorites.includes(book.id));
+            container.innerHTML = favoriteBooks.map(book => `
+                <div class="book-card">
+                    <div class="book-cover">${book.cover}</div>
+                    <h4>${book.title}</h4>
+                    <p class="book-author">${book.author}</p>
+                    <div class="book-meta">
+                        <span>${book.year} г.</span>
+                        <span>${book.language}</span>
+                    </div>
+                    <div class="book-actions">
+                        <button class="btn btn-success" onclick="downloadBook(${book.id})">
+                            📥 Скачать
+                        </button>
+                        <button class="btn btn-outline" onclick="startReading(${book.id})">
+                            📖 Читать
+                        </button>
+                        <button class="btn btn-danger" onclick="removeFromFavorites(${book.id})">
+                            ❌ Удалить
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Загрузка прогресса чтения
+        function loadReadingProgress() {
+            // Здесь будет загрузка книг в процессе чтения
+            const emptyState = document.getElementById('emptyReading');
+            emptyState.style.display = 'block';
+        }
+
+        // Загрузка истории
+        function loadHistory() {
+            // Здесь будет загрузка истории активности
+            const emptyState = document.getElementById('emptyHistory');
+            emptyState.style.display = 'block';
+        }
+
+        // Обновление статистики
+        function updateStats() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '{}');
+            const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '{}');
+            const downloads = JSON.parse(localStorage.getItem('downloads') || '{}');
+            
+            const userFavorites = favorites[currentUser.email] || [];
+            const userBookmarks = bookmarks[currentUser.email] || {};
+            const userDownloads = downloads[currentUser.email] || [];
+            
+            document.getElementById('statFavorites').textContent = userFavorites.length;
+            document.getElementById('statBookmarks').textContent = Object.keys(userBookmarks).length;
+            document.getElementById('statDownloads').textContent = userDownloads.length;
+            
+            // Подсчитываем прочитанные книги (прогресс > 90%)
+            let booksRead = 0;
+            Object.keys(userBookmarks).forEach(bookId => {
+                const bookmark = userBookmarks[bookId];
+                const book = books.find(b => b.id == bookId);
+                if (book) {
+                    const progress = (bookmark.currentPage / book.pages) * 100;
+                    if (progress >= 90) {
+                        booksRead++;
+                    }
+                }
+            });
+            document.getElementById('statBooksRead').textContent = booksRead;
+        }
+
+        // Функции для работы с закладками
+        function startReading(bookId) {
+            const book = books.find(b => b.id === bookId);
+            if (book) {
+                const currentPage = prompt(`Начать чтение "${book.title}". Введите страницу, с которой начать:`, "1");
+                if (currentPage && !isNaN(currentPage)) {
+                    addBookmark(bookId, parseInt(currentPage));
+                }
+            }
+        }
+
+        function continueReading(bookId) {
+            const book = books.find(b => b.id === bookId);
+            if (book) {
+                showNotification(`Продолжаем чтение "${book.title}"`, 'info');
+                // В реальном приложении здесь будет открытие книги для чтения
+            }
+        }
+
+        function updateBookmark(bookId) {
+            const book = books.find(b => b.id === bookId);
+            if (book) {
+                const currentPage = prompt(`Обновить закладку для "${book.title}". Введите текущую страницу:`);
+                if (currentPage && !isNaN(currentPage)) {
+                    addBookmark(bookId, parseInt(currentPage));
+                showNotification('Закладка обновлена', 'success');
+                loadBookmarks();
+                updateStats();
+                }
+            }
+        }
+
+        function removeBookmark(bookId) {
+            if (!confirm('Удалить закладку?')) return;
+            
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '{}');
+            
+            if (bookmarks[currentUser.email]) {
+                delete bookmarks[currentUser.email][bookId];
+                localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+                showNotification('Закладка удалена', 'info');
+                loadBookmarks();
+                updateStats();
+            }
+        }
+
+        // Загрузка при открытии страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            loadUserData();
+        });
+    </script>
+</body>
+</html>
