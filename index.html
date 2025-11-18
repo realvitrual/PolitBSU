@@ -19,107 +19,6 @@
                 <li><a href="contacts.html">Контакты</a></li>
                 <li><a href="login.html" id="authLink">Войти</a></li>
             </ul>
-            
-            <!-- Кнопка гамбургера для мобильных -->
-            <button class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Мобильное меню -->
-    <div class="mobile-menu">
-        <div class="mobile-menu-header">
-            <a href="index.html" class="mobile-menu-logo">
-                📚 Кафедра политологии
-            </a>
-            <button class="close-menu">×</button>
-        </div>
-        
-        <ul class="mobile-nav-menu">
-            <li><a href="index.html">🏠 Главная</a></li>
-            <li><a href="catalog.html">📖 Каталог книг</a></li>
-            <li><a href="profile.html">👤 Личный кабинет</a></li>
-            <li><a href="contacts.html">📞 Контакты</a></li>
-            <li><a href="login.html" id="mobileAuthLink">🔐 Войти</a></li>
-        </ul>
-    </div>
-
-    <!-- Оверлей для мобильного меню -->
-    <div class="mobile-menu-overlay"></div>
-
-    <!-- Остальное содержимое страницы остается без изменений -->
-    <section class="hero">
-        <!-- ... -->
-    </section>
-
-    <!-- Футер -->
-    <footer class="footer">
-        <!-- ... -->
-    </footer>
-
-    <script src="scripts.js"></script>
-    <script>
-        // Обновляем навигацию и для мобильного меню
-        function updateNavigation() {
-            const authLinks = document.querySelectorAll('#authLink');
-            const mobileAuthLink = document.getElementById('mobileAuthLink');
-            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-            
-            authLinks.forEach(link => {
-                if (currentUser) {
-                    link.textContent = 'Личный кабинет';
-                    link.href = 'profile.html';
-                } else {
-                    link.textContent = 'Войти';
-                    link.href = 'login.html';
-                }
-            });
-            
-            if (mobileAuthLink) {
-                if (currentUser) {
-                    mobileAuthLink.textContent = '👤 Личный кабинет';
-                    mobileAuthLink.href = 'profile.html';
-                } else {
-                    mobileAuthLink.textContent = '🔐 Войти';
-                    mobileAuthLink.href = 'login.html';
-                }
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            updateNavigation();
-        });
-    </script>
-</body>
-</html>
-
-
-
-
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Кафедра политологии БГУ - Главная</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <!-- Навигация -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="nav-logo">
-                📚 Кафедра политологии
-            </a>
-            <ul class="nav-menu">
-                <li><a href="index.html">Главная</a></li>
-                <li><a href="catalog.html">Каталог книг</a></li>
-                <li><a href="contacts.html">Контакты</a></li>
-                <li><a href="login.html" id="authLink">Войти</a></li>
-            </ul>
         </div>
     </nav>
 
@@ -276,3 +175,4 @@
     </script>
 </body>
 </html>
+
